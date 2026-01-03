@@ -1,0 +1,87 @@
+body {
+  font-family: "Courier New", Courier, monospace;
+}
+header {
+  font-size: 10px;
+  display: flex;
+}
+header #logo {
+  width: 3%;
+  height: 3%;
+}
+header h1 {
+  margin-left: 5px;
+  margin-top: 0;
+}
+#honkey {
+  color: #262830;
+}
+#type {
+  color: #41757f;
+}
+#mode {
+  display: flex;
+  flex: content;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+#extended {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+button {
+  height: 25px;
+  width: 50px;
+}
+.container {
+  margin: 0 auto;
+  width: 80vw;
+  height: 50vh;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  border: solid goldenrod 1px;
+  margin-bottom: 10px;
+}
+.word-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.words {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  color: #262830;
+  word-wrap: break-word;
+}
+#typingInput {
+  width: 100%;
+  min-height: 80%;
+  resize: none;
+
+  background: transparent;
+  color: 262830;
+  font-size: 18px;
+
+  border: none;
+  border-bottom: 2px solid goldenrod;
+  outline: none;
+
+  padding: 6px 0;
+}
+#hint {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
