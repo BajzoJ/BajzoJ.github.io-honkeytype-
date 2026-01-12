@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>honkeytype</title>
-    <link rel="icon" href="honkeyType_blede.png">
+    <link rel="icon" href="pohonkyBlede_Type.png">
 <link rel="stylesheet" href="honkeyType.css">
 </head>
 <body>
     <header>
-        <img src="honkeyType_tmave.png" id="logo">
-        <h1><strong id="honkey">Honkey</strong><strong id="type">Type</strong></h1>
+        <img src="HonkeyType_tmave_logo.png" id="logo" class="Hitem">
+        <h1 class="Hitem"><strong id="honkey">Honkey</strong><strong id="type">Type</strong></h1>
     </header>
     <main>
 
         <div class="settings">
             <div id="mode">
-                <button id="timeBtn">time</button>
-                <button id="wordBtn">words</button>
+                <button class="modebtn" id="timeBtn">time</button>
+                <button class="modebtn" id="wordBtn">words</button>
 
             </div>
             <div id="extended"></div>
         <div id="lowerbody">
             <div class="container">
-                <div id="testWiew">
+                <div id="testView">
                     <div class="word-container">
                         <div class="words" id="wordsDisplay"></div>
                         <textarea
@@ -57,7 +57,30 @@
             </div>
             <div class="hint" id="hint">Start typing to begin the test</div>
         </div>
+        <div id="resultsView" class="results hidden">
+            <h2>Test Complete</h2>
+            <div class="results-card">
+                <div class="results-main">
+                    <div class="result-item">
+                        <div class="result-label">WPM</div>
+                        <div class="result-value" id="finalWpm">0</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">accuracy</div>
+                        <div class="result-value" id="finalAccuracy">0%</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-label">Raw WPM</div>
+                        <div class="result-value" id="finalRawWpm">0</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Characters</div>
+                        <div class="detal-value" id="finalChars">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
-<script src="honkeyType.js"></script>
+<script src="HonkeyType.js"></script>
 </body>  
 </html>
