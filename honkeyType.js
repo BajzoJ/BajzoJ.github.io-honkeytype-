@@ -1,29 +1,204 @@
 const wordList = [
-  "moan", "arrogant", "messy", "mind", "fabulous", "polish", "foolish", "straw", "skate", "blue",
-  "teaching", "coal", "blue-eyed", "ants", "short", "malicious", "gigantic", "disapprove",
-  "uneven", "fantastic", "terrific", "feeble", "fat", "blade", "prick", "godly",
-  "habitual", "argument", "sleepy", "crate", "motionless", "kiss", "screeching", "lonely",
-  "industrious", "grouchy", "zippy", "cub", "volcano", "right", "uttermost", "tail",
-  "fragile", "tip", "chew", "apologise", "pull", "report", "seashore", "planes",
-  "momentous", "excuse", "gorgeous", "scold", "finicky", "flagrant", "pray", "bent",
-  "surprise", "surround", "bump", "incandescent", "cooing", "belligerent", "tent", "scary",
-  "salt", "nutritious", "alert", "board", "approve", "creature", "support", "basin",
-  "coherent", "meek", "press", "railway", "happy", "place", "aware", "train",
-  "light", "deer", "unhealthy", "wind", "existence", "shape", "sail", "flavor",
-  "abiding", "aunt", "proud", "torpid", "money", "punishment", "copy", "mine",
-  "allow", "perform", "rose", "drip", "bolt", "holiday", "tank", "things",
-  "gifted", "advice", "flap", "dare", "collect", "phone", "pie", "itch",
-  "slim", "self", "ultra", "chief", "political", "possess", "next", "sordid",
-  "possible", "glamorous", "jail", "outstanding", "cherry", "haircut", "elated", "oceanic",
-  "replace", "disagreeable", "undesirable", "wriggle", "meddle", "empty", "turkey", "hate",
-  "wren", "cloudy", "steep", "key", "useful", "lie", "broken", "deceive",
-  "zany", "temporary", "volatile", "bang", "roll", "pretend", "feeling", "rob",
-  "well-to-do", "branch", "respect", "wacky", "groan", "evanescent", "friends", "deafening",
-  "inquisitive", "repulsive", "expand", "raise", "hypnotic", "appear", "invention", "winter",
-  "reply", "texture", "ubiquitous", "two", "anxious", "health", "bells", "fetch",
-  "team", "skinny", "adhesive", "scintillating", "whistle", "blow", "tense", "prose",
-  "decorate", "important", "town", "day", "change", "expansion", "naughty", "license",
-  "arrive", "lying", "kettle", "building","scarce", "retire", //200 slov
+  "moan",
+  "arrogant",
+  "messy",
+  "mind",
+  "fabulous",
+  "polish",
+  "foolish",
+  "straw",
+  "skate",
+  "blue",
+  "teaching",
+  "coal",
+  "blue-eyed",
+  "ants",
+  "short",
+  "malicious",
+  "gigantic",
+  "disapprove",
+  "uneven",
+  "fantastic",
+  "terrific",
+  "feeble",
+  "fat",
+  "blade",
+  "prick",
+  "godly",
+  "habitual",
+  "argument",
+  "sleepy",
+  "crate",
+  "motionless",
+  "kiss",
+  "screeching",
+  "lonely",
+  "industrious",
+  "grouchy",
+  "zippy",
+  "cub",
+  "volcano",
+  "right",
+  "uttermost",
+  "tail",
+  "fragile",
+  "tip",
+  "chew",
+  "apologise",
+  "pull",
+  "report",
+  "seashore",
+  "planes",
+  "momentous",
+  "excuse",
+  "gorgeous",
+  "scold",
+  "finicky",
+  "flagrant",
+  "pray",
+  "bent",
+  "surprise",
+  "surround",
+  "bump",
+  "incandescent",
+  "cooing",
+  "belligerent",
+  "tent",
+  "scary",
+  "salt",
+  "nutritious",
+  "alert",
+  "board",
+  "approve",
+  "creature",
+  "support",
+  "basin",
+  "coherent",
+  "meek",
+  "press",
+  "railway",
+  "happy",
+  "place",
+  "aware",
+  "train",
+  "light",
+  "deer",
+  "unhealthy",
+  "wind",
+  "existence",
+  "shape",
+  "sail",
+  "flavor",
+  "abiding",
+  "aunt",
+  "proud",
+  "torpid",
+  "money",
+  "punishment",
+  "copy",
+  "mine",
+  "allow",
+  "perform",
+  "rose",
+  "drip",
+  "bolt",
+  "holiday",
+  "tank",
+  "things",
+  "gifted",
+  "advice",
+  "flap",
+  "dare",
+  "collect",
+  "phone",
+  "pie",
+  "itch",
+  "slim",
+  "self",
+  "ultra",
+  "chief",
+  "political",
+  "possess",
+  "next",
+  "sordid",
+  "possible",
+  "glamorous",
+  "jail",
+  "outstanding",
+  "cherry",
+  "haircut",
+  "elated",
+  "oceanic",
+  "replace",
+  "disagreeable",
+  "undesirable",
+  "wriggle",
+  "meddle",
+  "empty",
+  "turkey",
+  "hate",
+  "wren",
+  "cloudy",
+  "steep",
+  "key",
+  "useful",
+  "lie",
+  "broken",
+  "deceive",
+  "zany",
+  "temporary",
+  "volatile",
+  "bang",
+  "roll",
+  "pretend",
+  "feeling",
+  "rob",
+  "well-to-do",
+  "branch",
+  "respect",
+  "wacky",
+  "groan",
+  "evanescent",
+  "friends",
+  "deafening",
+  "inquisitive",
+  "repulsive",
+  "expand",
+  "raise",
+  "hypnotic",
+  "appear",
+  "invention",
+  "winter",
+  "reply",
+  "texture",
+  "ubiquitous",
+  "two",
+  "anxious",
+  "health",
+  "bells",
+  "fetch",
+  "team",
+  "skinny",
+  "adhesive",
+  "scintillating",
+  "whistle",
+  "blow",
+  "tense",
+  "prose",
+  "decorate",
+  "important",
+  "town",
+  "day",
+  "change",
+  "expansion",
+  "naughty",
+  "license",
+  "arrive",
+  "lying",
+  "kettle",
+  "building",
+  "scarce",
+  "retire", //200 slov
 ];
 let testduration = 60;
 let words = [];
@@ -35,6 +210,7 @@ let correctChars = 0;
 let totalChars = 0;
 let completedWords = [];
 let timeInterval = null;
+const PLACEHOLDER = "\u200B";
 
 const timeBtn = document.getElementById("timeBtn");
 const wordBtn = document.getElementById("wordBtn");
@@ -176,7 +352,8 @@ function restartTest() {
 
   generateWords();
 
-  typingInput.value = "";
+  typingInput.value = PLACEHOLDER;
+  typingInput.setSelectionRange(1, 1);
   typingInput.disabled = false;
   typingInput.focus();
 
@@ -195,7 +372,7 @@ function setDuration(duration, event) {
 }
 
 typingInput.addEventListener("input", (e) => {
-  const value = e.target.value;
+  const value = e.target.value.replace(PLACEHOLDER, "");
 
   if (!startTime && value.length > 0) {
     startTime = Date.now();
@@ -232,8 +409,8 @@ typingInput.addEventListener("keydown", (e) => {
     completedWords.push(typedWord);
     currentWordIndex++;
     currentInput = "";
-    typingInput.value = "";
-
+    typingInput.value = PLACEHOLDER;
+    typingInput.setSelectionRange(1, 1);
     renderWords();
     updateStats();
   }
@@ -248,60 +425,80 @@ typingInput.addEventListener("blur", () => {
 document.addEventListener("keydown", (e) => {
   if (e.key === "Tab") {
     e.preventDefault();
-  }
-
-  if (e.key === "Tab" && e.shiftKey === false) {
-    const nextKey = new Promise((resolve) => {
-      const handler = (evt) => {
-        if (evt.key === "Enter") {
-          evt.preventDefault();
-          restartTest();
-        }
-        document.removeEventListener("keydown", handler);
-        resolve();
-      };
-      document.addEventListener("keydown", handler);
-      setTimeout(() => {
-        document.removeEventListener("keydown", handler);
-        resolve();
-      }, 1000);
-    });
+    restartTest();
   }
 });
 
 generateWords();
-typingInput.focus();
 
 timeBtn.addEventListener("click", () => {
+  timeBtn.classList.add("active");
+  wordBtn.classList.remove("active");
+
   container.innerHTML = "";
+
   const quar = document.createElement("button");
   const half = document.createElement("button");
   const full = document.createElement("button");
+
   quar.textContent = "15s";
   half.textContent = "30s";
   full.textContent = "60s";
+
+  quar.className = "submode-btn active";
+  half.className = "submode-btn";
+  full.className = "submode-btn";
+
   container.appendChild(quar);
   container.appendChild(half);
   container.appendChild(full);
-  document.getElementById("mode").style.marginBottom = "5px";
+
+  const subBtns = [quar, half, full];
+
+  subBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      subBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+  });
+
   quar.addEventListener("click", () => setDuration(15));
   half.addEventListener("click", () => setDuration(30));
   full.addEventListener("click", () => setDuration(60));
 });
+
 timeBtn.addEventListener("mouseover", () => {
   document.getElementById("timeBtn").style.background = "white";
 });
 
 wordBtn.addEventListener("click", () => {
+  wordBtn.classList.add("active");
+  timeBtn.classList.remove("active");
+
   container.innerHTML = "";
+
   const quar = document.createElement("button");
   const half = document.createElement("button");
   const full = document.createElement("button");
+
   quar.textContent = "30w";
   half.textContent = "50w";
   full.textContent = "100w";
+
+  quar.className = "submode-btn active";
+  half.className = "submode-btn";
+  full.className = "submode-btn";
+
   container.appendChild(quar);
   container.appendChild(half);
   container.appendChild(full);
-  document.getElementById("mode").style.marginBottom = "5px";
+
+  const subBtns = [quar, half, full];
+
+  subBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      subBtns.forEach((b) => b.classList.remove("active"));
+      btn.classList.add("active");
+    });
+  });
 });
