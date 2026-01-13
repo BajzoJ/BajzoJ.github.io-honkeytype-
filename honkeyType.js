@@ -1,3 +1,5 @@
+console.log("HonkeyType.js loaded successfully");
+
 const wordList = [
   "moan",
   "arrogant",
@@ -198,8 +200,9 @@ const wordList = [
   "kettle",
   "building",
   "scarce",
-  "retire", //200 slov
+  "retire",
 ];
+
 let testduration = 60;
 let words = [];
 let currentWordIndex = 0;
@@ -208,21 +211,20 @@ let startTime = null;
 let timeLeft = testduration;
 let correctChars = 0;
 let totalChars = 0;
-let completedWords = [];
 let timeInterval = null;
 const PLACEHOLDER = "\u200B";
 
-const timeBtn = document.getElementById("timeBtn");
-const wordBtn = document.getElementById("wordBtn");
-const container = document.getElementById("extended");
 const typingInput = document.getElementById("typingInput");
 const wordsDisplay = document.getElementById("wordsDisplay");
 const timeDisplay = document.getElementById("timeDisplay");
 const wpmDisplay = document.getElementById("wpmDisplay");
 const accuracyDisplay = document.getElementById("accuracyDisplay");
 const hint = document.getElementById("hint");
-const testView = document.getElementById("testview");
 const resultsView = document.getElementById("resultsView");
+const testView = document.getElementById("testView");
+const container = document.getElementById("extended");
+const timeBtn = document.getElementById("timeBtn");
+const wordBtn = document.getElementById("wordBtn");
 
 function generateWords() {
   words = [];
@@ -239,29 +241,23 @@ function renderWords() {
   displayWords.forEach((word, index) => {
     const wordSpan = document.createElement("span");
     wordSpan.className = "word";
-    wordSpan.id = `word-${index}`;
 
     if (index === currentWordIndex) {
       wordSpan.className = "word active";
       renderCurrentWord(wordSpan, word);
     } else if (index < currentWordIndex) {
-      wordSpan.className =
-        completedWords[index] === word
-          ? "word-completed-correct"
-          : "word-completed-incorrect";
+      wordSpan.style.color = "#444";
       wordSpan.textContent = word;
     } else {
       wordSpan.textContent = word;
     }
     wordsDisplay.appendChild(wordSpan);
-
     wordsDisplay.appendChild(document.createTextNode(" "));
   });
 }
 
 function renderCurrentWord(wordSpan, word) {
   wordSpan.innerHTML = "";
-
   for (let i = 0; i < word.length; i++) {
     const charSpan = document.createElement("span");
     charSpan.className = "char";
@@ -271,7 +267,6 @@ function renderCurrentWord(wordSpan, word) {
       charSpan.className =
         currentInput[i] === word[i] ? "char correct" : "char incorrect";
     }
-
     wordSpan.appendChild(charSpan);
   }
 
@@ -285,31 +280,24 @@ function renderCurrentWord(wordSpan, word) {
   }
 }
 
-function startTimer() {
-  if (timeInterval) return;
-
-  timeInterval = setInterval(() => {
-    timeLeft--;
-    timeDisplay.textContent = timeLeft;
-
-    if (timeLeft <= 0) {
-      endTest();
-    }
-
-    updateStats();
-  }, 1000);
-}
-
 function updateStats() {
-  if (!startTime) return;
-
   const timeElapsed = (testduration - timeLeft) / 60;
   const wpm = timeElapsed > 0 ? Math.round(correctChars / 5 / timeElapsed) : 0;
   const accuracy =
     totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 100;
 
   wpmDisplay.textContent = wpm;
-  accuracyDisplay.textContent = accuracy;
+  accuracyDisplay.textContent = accuracy + "%";
+}
+
+function startTimer() {
+  if (timeInterval) return;
+  timeInterval = setInterval(() => {
+    timeLeft--;
+    timeDisplay.textContent = timeLeft;
+    updateStats();
+    if (timeLeft <= 0) endTest();
+  }, 1000);
 }
 
 function endTest() {
@@ -322,114 +310,107 @@ function endTest() {
   const accuracy =
     totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 100;
 
-  showResults(wpm, accuracy, rawWpm);
-}
-
-function showResults(wpm, accuracy, rawWpm) {
   document.getElementById("finalWpm").textContent = wpm;
   document.getElementById("finalAccuracy").textContent = accuracy + "%";
   document.getElementById("finalRawWpm").textContent = rawWpm;
   document.getElementById("finalChars").textContent = totalChars;
 
   resultsView.classList.remove("hidden");
+  testView.classList.add("hidden");
 }
 
 function restartTest() {
-  currentWordIndex = 0;
-  currentInput = "";
-  startTime = null;
-  timeLeft = testduration;
-  correctChars = 0;
-  totalChars = 0;
-  completedWords = [];
   clearInterval(timeInterval);
   timeInterval = null;
+  startTime = null;
+  timeLeft = testduration;
+  currentWordIndex = 0;
+  currentInput = "";
+  correctChars = 0;
+  totalChars = 0;
 
-  timeDisplay.textContent = testduration;
-  wpmDisplay.textContent = "0";
-  accuracyDisplay.textContent = "100" + "%";
-  hint.textContent = "Start typing to begin the test";
-
-  generateWords();
-
-  typingInput.value = PLACEHOLDER;
-  typingInput.setSelectionRange(1, 1);
-  typingInput.disabled = false;
-  typingInput.focus();
+  timeDisplay.textContent = timeLeft;
+  wpmDisplay.textContent = 0;
+  hint.textContent = "Start typing...";
 
   resultsView.classList.add("hidden");
   testView.classList.remove("hidden");
+
+  generateWords();
+
+  typingInput.disabled = false;
+  typingInput.value = PLACEHOLDER;
+  typingInput.focus();
+  typingInput.setSelectionRange(1, 1);
 }
 
-function setDuration(duration, event) {
-  testduration = duration;
+function setDuration(dur, e) {
+  testduration = dur;
+  document
+    .querySelectorAll(".submode-btn")
+    .forEach((b) => b.classList.remove("active"));
+  if (e && e.target) e.target.classList.add("active");
   restartTest();
-
-  document.querySelectorAll(".nav button").forEach((btn) => {
-    btn.classList.remove("active");
-  });
-  event.target.classList.add("active");
 }
 
 typingInput.addEventListener("input", (e) => {
-  const value = e.target.value.replace(PLACEHOLDER, "");
-
-  if (!startTime && value.length > 0) {
-    startTime = Date.now();
-    startTimer();
-    hint.textContent = "";
+  if (!typingInput.value.startsWith(PLACEHOLDER)) {
+    typingInput.value = PLACEHOLDER + typingInput.value;
+    typingInput.setSelectionRange(
+      typingInput.value.length,
+      typingInput.value.length
+    );
   }
 
-  currentInput = value;
-  renderWords();
-});
+  const cleanValue = typingInput.value.substring(1);
 
-typingInput.addEventListener("keydown", (e) => {
-  if (e.key === " ") {
-    e.preventDefault();
+  if (!startTime && cleanValue.length > 0) {
+    startTime = Date.now();
+    startTimer();
+  }
 
-    const currentWord = words[currentWordIndex];
-    const typedWord = currentInput.trim();
+  if (cleanValue.endsWith(" ")) {
+    const typedWord = cleanValue.trim();
+    const targetWord = words[currentWordIndex];
 
-    const charsTyped = typedWord.length;
-    let charsCorrect = 0;
-
-    if (typedWord === currentWord) {
-      charsCorrect = currentWord.length;
+    let wordCorrectChars = 0;
+    if (typedWord === targetWord) {
+      wordCorrectChars = targetWord.length;
     } else {
-      for (let i = 0; i < Math.min(typedWord.length, currentWord.length); i++) {
-        if (typedWord[i] === currentWord[i]) {
-          charsCorrect++;
-        }
+      for (let i = 0; i < Math.min(typedWord.length, targetWord.length); i++) {
+        if (typedWord[i] === targetWord[i]) wordCorrectChars++;
       }
     }
 
-    totalChars += charsTyped;
-    correctChars += charsCorrect;
-    completedWords.push(typedWord);
+    correctChars += wordCorrectChars;
+    if (typedWord === targetWord) correctChars++;
+    totalChars += typedWord.length + 1;
+
     currentWordIndex++;
     currentInput = "";
     typingInput.value = PLACEHOLDER;
     typingInput.setSelectionRange(1, 1);
+
     renderWords();
     updateStats();
+    return;
+  }
+
+  currentInput = cleanValue;
+  renderWords();
+});
+
+typingInput.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowLeft" && typingInput.selectionStart <= 1) {
+    e.preventDefault();
   }
 });
 
-typingInput.addEventListener("blur", () => {
-  if (!typingInput.disabled) {
+document.addEventListener("click", () => {
+  if (typingInput && !typingInput.disabled) {
     typingInput.focus();
   }
 });
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Tab") {
-    e.preventDefault();
-    restartTest();
-  }
-});
-
-generateWords();
 
 timeBtn.addEventListener("click", () => {
   timeBtn.classList.add("active");
@@ -437,68 +418,25 @@ timeBtn.addEventListener("click", () => {
 
   container.innerHTML = "";
 
-  const quar = document.createElement("button");
-  const half = document.createElement("button");
-  const full = document.createElement("button");
-
-  quar.textContent = "15s";
-  half.textContent = "30s";
-  full.textContent = "60s";
-
-  quar.className = "submode-btn active";
-  half.className = "submode-btn";
-  full.className = "submode-btn";
-
-  container.appendChild(quar);
-  container.appendChild(half);
-  container.appendChild(full);
-
-  const subBtns = [quar, half, full];
-
-  subBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      subBtns.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-    });
+  const times = [15, 30, 60];
+  times.forEach((t) => {
+    const btn = document.createElement("button");
+    btn.textContent = t + "s";
+    btn.className = "submode-btn" + (t === 60 ? " active" : "");
+    btn.addEventListener("click", (e) => setDuration(t, e));
+    container.appendChild(btn);
   });
 
-  quar.addEventListener("click", () => setDuration(15));
-  half.addEventListener("click", () => setDuration(30));
-  full.addEventListener("click", () => setDuration(60));
+  setDuration(60, null);
 });
 
-timeBtn.addEventListener("mouseover", () => {
-  document.getElementById("timeBtn").style.background = "white";
-});
+restartTest();
 
-wordBtn.addEventListener("click", () => {
-  wordBtn.classList.add("active");
-  timeBtn.classList.remove("active");
-
-  container.innerHTML = "";
-
-  const quar = document.createElement("button");
-  const half = document.createElement("button");
-  const full = document.createElement("button");
-
-  quar.textContent = "30w";
-  half.textContent = "50w";
-  full.textContent = "100w";
-
-  quar.className = "submode-btn active";
-  half.className = "submode-btn";
-  full.className = "submode-btn";
-
-  container.appendChild(quar);
-  container.appendChild(half);
-  container.appendChild(full);
-
-  const subBtns = [quar, half, full];
-
-  subBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      subBtns.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-    });
-  });
+container.innerHTML = "";
+[15, 30, 60].forEach((t) => {
+  const btn = document.createElement("button");
+  btn.textContent = t + "s";
+  btn.className = "submode-btn" + (t === 60 ? " active" : "");
+  btn.addEventListener("click", (e) => setDuration(t, e));
+  container.appendChild(btn);
 });

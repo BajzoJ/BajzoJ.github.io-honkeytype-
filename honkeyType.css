@@ -1,22 +1,24 @@
 body {
   margin: 0;
-  font-family: monospace;
-  color: #999;
+  font-family: "Courier New", Courier, monospace;
+  background-color: #f0f0f0;
+  color: #333;
 }
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 24px;
-  border-bottom: 1px solid #eaeaea;
+  padding: 15px 40px;
+  background-color: #fff;
+  border-bottom: 2px solid #e1e1e1;
 }
 
 .header-left {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: rgb(7, 87, 87);
+  gap: 10px;
+  color: #444;
 }
 
 #logo {
@@ -26,107 +28,128 @@ header {
 .login-btn {
   background: none;
   border: none;
-  font-family: system-ui;
   font-weight: bold;
-  font-size: 18px;
-  color: rgb(75, 131, 131);
+  font-size: 16px;
+  color: #4a90e2;
   cursor: pointer;
 }
 
-.login-btn:hover {
-  font-size: 19px;
-}
-
 .container {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 0 20px;
 }
 
 .word-container {
   position: relative;
-  border: 2px solid #cfe3f7;
-  border-radius: 10px;
-  padding: 20px;
   background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  min-height: 120px;
+  cursor: text;
 }
 
 .words {
-  position: relative;
-  font-size: 16px;
+  font-size: 24px;
   line-height: 1.6;
-  color: #b0b0b0;
+  color: #999;
+  user-select: none;
+  position: relative;
   z-index: 1;
+}
+
+.word.active {
+  color: #444;
+}
+
+.char.correct {
+  color: #2c3e50;
+}
+
+.char.incorrect {
+  color: #e74c3c;
+  text-decoration: underline;
+}
+
+.char.extra {
+  color: #c0392b;
 }
 
 #typingInput {
   position: absolute;
-  top: 0%;
-  left: 0%;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  padding: 20px;
+  opacity: 0;
+  z-index: 2;
+  cursor: default;
+  resize: none;
   border: none;
   outline: none;
-  background: transparent;
-  font-size: 16px;
-  font-family: inherit;
-  color: transparent;
-  caret-color: #4a90e2;
-  z-index: 2;
 }
 
 .stats {
   display: flex;
   justify-content: space-between;
-  margin-top: 16px;
-  padding-top: 12px;
-  border-top: 1px solid #eee;
-  font-size: 13px;
-  color: #999;
+  margin-top: 20px;
+  color: #666;
+  font-size: 18px;
 }
 
-#mode {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin: 20px 0;
-  margin-bottom: 2px;
+.stat-value {
+  font-weight: bold;
+  font-size: 24px;
+  color: #4a90e2;
 }
 
+#mode,
 #extended {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin-top: 0;
+  gap: 15px;
+  margin: 15px 0;
 }
+
+.modebtn,
 .submode-btn {
   background: none;
   border: none;
-  padding: 6px 3px;
-  font-size: 14px;
-  color: #999;
   cursor: pointer;
+  color: #999;
+  font-size: 16px;
+  padding: 5px 10px;
 }
 
+.modebtn.active,
 .submode-btn.active {
   color: #4a90e2;
   border-bottom: 2px solid #4a90e2;
 }
 
-.modebtn {
-  background: none;
-  border: none;
-  padding: 6px 2px;
+.hidden {
+  display: none !important;
+}
+
+#resultsView {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.restart-btn {
   font-size: 20px;
-  color: #999;
+  margin-top: 20px;
+  color: #4a90e2;
+  background: none;
+  border: 2px solid #4a90e2;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.modebtn.active {
-  color: #4a90e2;
-  border-bottom: 2px solid #4a90e2;
-}
-
-.hidden {
-  display: none;
+.hint {
+  text-align: center;
+  margin-top: 20px;
+  color: #888;
 }
