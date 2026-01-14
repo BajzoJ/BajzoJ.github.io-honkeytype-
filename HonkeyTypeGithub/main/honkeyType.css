@@ -1,3 +1,4 @@
+
 /* =====================
     ZÁKLAD (Ujov štýl s opravami)
 ===================== */
@@ -47,7 +48,7 @@ header {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: rgb(7, 87, 87);
+  color: #7ec5f0;
 }
 
 #logo {
@@ -256,4 +257,21 @@ footer a:hover {
   text-align: center;
   margin-top: 20px;
   color: #888;
+}
+
+/* =====================
+    DARK MODE - MAIN PAGE
+===================== */
+/* =====================
+    OPRAVY A DARK MODE (Prilep na koniec súboru)
+===================== */
+
+/* 1. Oprava modrého textu "Type" */
+#type {
+    color: #7ec5f0 !important;
+}
+
+.discordBtn {
+    border: none;
+    background-color: transparent;
 }
