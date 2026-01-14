@@ -4,67 +4,104 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>honkeytype</title>
+    <link rel="icon" href="pohonkyBlede_Type.png" />
     <link rel="stylesheet" href="honkeyType.css" />
   </head>
   <body>
-    <header>
-      <div class="header-left">
-        <img src="HonkeyType_tmave_logo.png" id="logo" />
-        <h1>Type</h1>
-      </div>
-      <button class="login-btn">sign in</button>
-    </header>
-
-    <main class="container">
-      <div class="settings">
-        <div id="mode">
-          <button class="active" id="timeBtn">time</button>
-          <button id="wordBtn">words</button>
+    <div class="page">
+      <header>
+        <div class="header-left">
+          <img src="HonkeyType_blede_logo.png" id="logo" />
+          <h1><strong id="type">Type</strong></h1>
         </div>
-        <div id="extended"></div>
-      </div>
+        <button class="login-btn">sign in</button>
+      </header>
 
-      <div id="testView">
-        <div class="word-container">
-          <div class="words" id="wordsDisplay"></div>
-          <textarea
-            id="typingInput"
-            rows="3"
-            autocomplete="off"
-            autocorrect="off"
-            spellcheck="false"
-          ></textarea>
+      <main class="container">
+        <div class="settings">
+          <div id="mode">
+            <button class="active modebtn" id="timeBtn">time</button>
+            <button class="modebtn" id="wordBtn">words</button>
+          </div>
+          <div id="extended"></div>
         </div>
 
-        <div class="stats">
-          <div class="stat">
-            <div class="stat-value" id="timeDisplay">60s</div>
-            time
+        <div id="testView">
+          <div class="word-container">
+            <div class="words" id="wordsDisplay"></div>
+            <textarea
+              id="typingInput"
+              rows="3"
+              class="hidden-input"
+              autocomplete="off"
+              autocorrect="off"
+              spellcheck="false"
+              placeholder="start typing..."
+            ></textarea>
           </div>
-          <div class="stat">
-            <div class="stat-value" id="wpmDisplay">0</div>
-            wpm
+
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-value" id="timeDisplay">60s</div>
+              <div class="stat-label">time</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value" id="wpmDisplay">0</div>
+              <div class="stat-label">wpm</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value" id="accuracyDisplay">100%</div>
+              <div class="stat-label">accuracy</div>
+            </div>
           </div>
-          <div class="stat">
-            <div class="stat-value" id="accuracyDisplay">100%</div>
-            acc
-          </div>
+          <div class="hint" id="hint">Start typing to begin the test</div>
         </div>
-        <div class="hint" id="hint">Start typing to begin the test</div>
-      </div>
 
-      <div id="resultsView" class="hidden">
-        <h2>Test Complete</h2>
-        <h1>WPM: <span id="finalWpm">0</span></h1>
-        <p>accuracy: <span id="finalAccuracy">0%</span></p>
-        <p>Raw WPM: <span id="finalRawWpm">0</span></p>
-        <p>Chars: <span id="finalChars">0</span></p>
-        <button onclick="restartTest()" class="restart-btn">
-          Restart test
-        </button>
-      </div>
-    </main>
+        <div id="resultsView" class="hidden">
+          <h2 class="results-title">Test Complete</h2>
 
+          <div class="results-stats">
+            <div class="res-item">
+              <span class="res-label">wpm</span>
+              <span class="res-value" id="finalWpm">0</span>
+            </div>
+            <div class="res-item">
+              <span class="res-label">accuracy</span>
+              <span class="res-value" id="finalAccuracy">0%</span>
+            </div>
+            <div class="res-item">
+              <span class="res-label">raw</span>
+              <span class="res-value" id="finalRawWpm">0</span>
+            </div>
+            <div class="res-item">
+              <span class="res-label">chars</span>
+              <span class="res-value" id="finalChars">0</span>
+            </div>
+          </div>
+
+          <button onclick="restartTest()" class="restart-btn">
+            Restart test
+          </button>
+        </div>
+
+        <canvas id="wpmGraph" height="80"></canvas>
+      </main>
+
+      <footer>
+        <div class="footer-left">
+          <a href="#">support</a>
+          <a href="#">github</a>
+          <a href="#">discord</a>
+        </div>
+
+        <div class="footer-right">
+          <button class="theme-btn">dark mode</button>
+          <span>v1.0</span>
+        </div>
+      </footer>
+    </div>
     <script src="HonkeyType.js"></script>
   </body>
 </html>
+
+
