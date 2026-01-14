@@ -1,3 +1,4 @@
+
 /* =====================
    BASE
 ===================== */
@@ -48,7 +49,18 @@ header {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: rgb(7, 87, 87);
+}
+
+#type {
+    color: #7ec5f0;
+}
+
+.header-left a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
 }
 
 #logo {
@@ -259,15 +271,4 @@ footer a:hover {
   align-items: center;
   gap: 12px;
 }
-
-.theme-btn {
-  background: none;
-  border: none;
-  font-size: 12px;
-  color: #3a3a3a;
-  cursor: pointer;
-}
-
-.theme-btn:hover {
-  font-weight: bold;
-}
+/* DARK MODE DOPLNOK PRE REGISTER */
