@@ -1,9 +1,5 @@
 console.log("HonkeyType Hybrid JS loaded");
 
-/* ============================================================
-   1. ZOZNAM SLOV (Slovná zásoba)
-   Pole reťazcov, z ktorého systém náhodne vyberá slová pre test.
-   ============================================================ */
 const wordList = [
   "moan", "arrogant", "messy", "mind", "fabulous", "polish", "foolish", "straw",
   "skate", "blue", "teaching", "coal", "blue-eyed", "ants", "short", "malicious",
@@ -34,28 +30,22 @@ const wordList = [
   "building", "scarce", "retire",
 ];
 
-/* ============================================================
-   2. GLOBÁLNE PREMENNÉ (Stav aplikácie)
-   Tieto hodnoty sledujú aktuálny stav tvojho testu.
-   ============================================================ */
-let testduration = 60;      // Základná dĺžka v sekundách
-let words = [];             // Aktuálna sada vygenerovaných slov
-let currentWordIndex = 0;   // Index slova, ktoré sa práve píše
-let currentInput = "";      // Aktuálne napísané znaky v slove
-let startTime = null;       // Timestamp začiatku testu
-let timeLeft = testduration;// Odpočítavaný čas
-let correctChars = 0;       // Počet správne napísaných znakov (pre WPM)
-let totalChars = 0;         // Celkový počet znakov (pre presnosť)
-let completedWordsStatus = []; // Ukladá true/false pre každé dokončené slovo
-let timeInterval = null;    // Referencia na časovač (setInterval)
-const PLACEHOLDER = "\u200B"; // Špeciálny znak, aby input nebol nikdy prázdny
-let currentMode = "time";   // Mód: "time" (časový) alebo "words" (na počet slov)
-let wordLimit = 30;         // Počet slov pre Words mód
 
-/* ============================================================
-   3. DOM ELEMENTY
-   Prepojenie JS premenných s HTML prvkami na stránke.
-   ============================================================ */
+let testduration = 60;     
+let words = [];             // pole so slovami
+let currentWordIndex = 0;   // index pisaneho slova
+let currentInput = "";     
+let startTime = null;      
+let timeLeft = testduration;
+let correctChars = 0;       
+let totalChars = 0;         
+let completedWordsStatus = [];
+let timeInterval = null;  
+const PLACEHOLDER = "\u200B"; 
+let currentMode = "time";  
+let wordLimit = 30;        
+
+
 const typingInput = document.getElementById("typingInput");
 const wordsDisplay = document.getElementById("wordsDisplay");
 const timeDisplay = document.getElementById("timeDisplay");
@@ -69,90 +59,93 @@ const timeBtn = document.getElementById("timeBtn");
 const wordBtn = document.getElementById("wordBtn");
 const settings = document.querySelector(".settings");
 
-/* ============================================================
-   4. FUNKCIA: generateWords()
-   Vytvorí pole náhodných slov podľa zvoleného režimu.
-   ============================================================ */
-function generateWords() {
+
+function generateWords() { //generovanie slov
   words = [];
   completedWordsStatus = [];
 
-  let wordAmount;
-  // Ak sme v režime slov, vygenerujeme presný počet, inak 200 (pre časový mód)
-  if(currentMode === "words"){
-    wordAmount = wordLimit;
-  } else {
-    wordAmount = 200;
+  let pocetSlov = 200;
+
+  if (currentMode === "words") {
+    pocetSlov = wordLimit;
   }
 
-  for(let i = 0; i < wordAmount; i++){
-    // Náhodný výber z wordListu
-    words.push(wordList[Math.floor(Math.random() * wordList.length)]);
-    completedWordsStatus.push(null); // Pripravíme pole pre neskoršie hodnotenie
+  for (let i = 0; i < pocetSlov; i++) {
+    let nahodneSlovo = wordList[Math.floor(Math.random() * wordList.length)];
+    words.push(nahodneSlovo);
+    completedWordsStatus.push(null);
   }
-  renderWords(); // Vykreslíme ich do trenažéra
+
+  renderWords();
 }
 
-/* ============================================================
-   5. FUNKCIA: renderWords()
-   Hlavná zobrazovacia funkcia. Vykresľuje slová v trenažéri.
-   Používa dynamické orezanie (slice), aby sa slová posúvali.
-   ============================================================ */
+
 function renderWords() {
   wordsDisplay.innerHTML = "";
 
-  // Výpočet okna zobrazenia (aby sa slová hýbali ako v riadku)
-  let start = Math.max(0, currentWordIndex - 2);
-  let end = start + 40; // Zobrazujeme naraz 40 slov
-  const displayWords = words.slice(start, end);
+  let start = currentWordIndex;
+  let end = start + 40;
 
-  displayWords.forEach((word, index) => {
-    let realIndex = start + index; // Prepočet na globálny index v poli 'words'
-    const wordSpan = document.createElement("span");
+  if (end > words.length) {
+    end = words.length;
+  }
 
-    // Vetvenie podľa toho, v akom stave je slovo
+  let displayWords = words.slice(start, end);
+
+  for (let i = 0; i < displayWords.length; i++) {
+    let realIndex = start + i;
+    let word = displayWords[i];
+    let wordSpan = document.createElement("span");
+
     if (realIndex === currentWordIndex) {
-      wordSpan.className = "word active"; // Slovo, ktoré práve píšeš
+      wordSpan.className = "word active";
       renderCurrentWord(wordSpan, word);
+
     } else if (realIndex < currentWordIndex) {
-      // Slová, ktoré si už prešla (správne = zelené, nesprávne = červené)
-      wordSpan.className = completedWordsStatus[realIndex]
-        ? "word correct-word"
-        : "word incorrect-word";
+
+      if (completedWordsStatus[realIndex] === true) {
+        wordSpan.className = "word correct-word";
+      } else {
+        wordSpan.className = "word incorrect-word";
+      }
+
       wordSpan.textContent = word;
+
     } else {
-      wordSpan.className = "word"; // Slová v poradí
+      wordSpan.className = "word";
       wordSpan.textContent = word;
     }
+
     wordsDisplay.appendChild(wordSpan);
-    wordsDisplay.appendChild(document.createTextNode(" ")); // Pridá medzeru medzi spany
-  });
+    wordsDisplay.appendChild(document.createTextNode(" "));
+  }
 }
 
-/* ============================================================
-   6. FUNKCIA: renderCurrentWord()
-   Detailne vykresľuje písmená vnútri aktívneho slova.
-   Umožňuje vizuálnu spätnú väzbu (zelené/červené písmená).
-   ============================================================ */
+
+
+
 function renderCurrentWord(wordSpan, word) {
   wordSpan.innerHTML = "";
+
   for (let i = 0; i < word.length; i++) {
-    const charSpan = document.createElement("span");
+    let charSpan = document.createElement("span");
     charSpan.className = "char";
     charSpan.textContent = word[i];
-    
-    // Porovnanie tvojho vstupu s predlohou písmeno po písmene
+
     if (i < currentInput.length) {
-      charSpan.className =
-        currentInput[i] === word[i] ? "char correct" : "char incorrect";
+      if (currentInput[i] === word[i]) {
+        charSpan.className = "char correct";
+      } else {
+        charSpan.className = "char incorrect";
+      }
     }
+
     wordSpan.appendChild(charSpan);
   }
-  
-  // Logika pre "extra" písmená (ak napíšeš dlhšie slovo než treba)
+
   if (currentInput.length > word.length) {
     for (let i = word.length; i < currentInput.length; i++) {
-      const charSpan = document.createElement("span");
+      let charSpan = document.createElement("span");
       charSpan.className = "char extra";
       charSpan.textContent = currentInput[i];
       wordSpan.appendChild(charSpan);
@@ -160,107 +153,112 @@ function renderCurrentWord(wordSpan, word) {
   }
 }
 
-/* ============================================================
-   7. FUNKCIA: updateStats()
-   Prepočítava štatistiky v reálnom čase počas testu.
-   ============================================================ */
+
+
 function updateStats() {
-  // Výpočet uplynutého času v minútach
-  const timeElapsed = (testduration - timeLeft) / 60;
-  // WPM (Words Per Minute) - rátame 5 znakov ako jedno slovo
-  const wpm = timeElapsed > 0 ? Math.round(correctChars / 5 / timeElapsed) : 0;
-  // Accuracy (Presnosť) - pomer správnych znakov k všetkým
-  const accuracy =
-    totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 100;
+  let timeElapsed = (testduration - timeLeft) / 60;
+  let wpm = 0;
+  let accuracy = 100;
+
+  if (timeElapsed > 0) {
+    wpm = Math.round((correctChars / 5) / timeElapsed);
+  }
+
+  if (totalChars > 0) {
+    accuracy = Math.round((correctChars / totalChars) * 100);
+  }
 
   wpmDisplay.textContent = wpm;
   accuracyDisplay.textContent = accuracy + "%";
 }
 
-/* ============================================================
-   8. FUNKCIA: startTimer()
-   Spúšťa odpočítavanie času a volá aktualizáciu štatistík.
-   ============================================================ */
+
+
 function startTimer() {
-  if (timeInterval || currentMode === "words") return; // Zabezpečí, aby nebežalo viac časovačov naraz
-  timeInterval = setInterval(() => {
-    timeLeft--;
+  if (timeInterval || currentMode === "words") return;
+
+  timeInterval = setInterval(function() {
+    timeLeft = timeLeft - 1;
     timeDisplay.textContent = timeLeft + "s";
+
     updateStats();
-    if (timeLeft <= 0) endTest(); // Zastavenie pri nule
+
+    if (timeLeft <= 0) {
+      endTest();
+    }
   }, 1000);
 }
 
-/* ============================================================
-   9. FUNKCIA: endTest()
-   Ukončí test, zablokuje vstup a zobrazí výslednú tabuľku.
-   Tu je tá "polka kódu", ktorú si predtým spomínala.
-   ============================================================ */
+
+
 
 function endTest() {
   clearInterval(timeInterval);
   typingInput.disabled = true;
 
-  // Ak sme v móde slov, čas vypočítame z reálneho času od štartu po teraz
-  let timeElapsed;
+  let timeElapsed = 0;
   if (currentMode === "words") {
-    timeElapsed = (Date.now() - startTime) / 60000; // v minútach
+    timeElapsed = (Date.now() - startTime) / 60000;
   } else {
-    timeElapsed = (testduration - timeLeft) / 60; // v minútach
+    timeElapsed = (testduration - timeLeft) / 60;
   }
-  const wpm = timeElapsed > 0 ? Math.round(correctChars / 5 / timeElapsed) : 0;
-  const rawWpm = timeElapsed > 0 ? Math.round(totalChars / 5 / timeElapsed) : 0;
-  const accuracy =
-    totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 100;
 
-  // Vyplnenie všetkých ID pre výsledkovú tabuľku (WPM, Raw, Acc, Chars)
-  const ids = [
+  let wpm = 0;
+  let rawWpm = 0;
+  let accuracy = 100;
+
+  if (timeElapsed > 0) {
+    wpm = Math.round((correctChars / 5) / timeElapsed);
+    rawWpm = Math.round((totalChars / 5) / timeElapsed);
+  }
+
+  if (totalChars > 0) {
+    accuracy = Math.round((correctChars / totalChars) * 100);
+  }
+
+  let ids = [
     "finalWpm", "resWpm", "finalAccuracy", "resAccuracy",
     "finalRawWpm", "resRaw", "finalChars", "resChars"
   ];
-  const vals = [
+
+  let vals = [
     wpm, wpm, accuracy + "%", accuracy + "%",
     rawWpm, rawWpm, totalChars, totalChars
   ];
 
-  // Dynamické zapísanie hodnôt do HTML
-  ids.forEach((id, i) => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = vals[i];
-  });
+  for (let i = 0; i < ids.length; i++) {
+    let el = document.getElementById(ids[i]);
+    if (el) {
+      el.textContent = vals[i];
+    }
+  }
 
-  resultsView.classList.remove("hidden"); // Zobrazenie výsledkov
-  testView.classList.add("hidden");       // Skrytie písania
-  if(settings) settings.classList.add("hidden"); // Skrytie nastavení
+  resultsView.classList.remove("hidden");
+  testView.classList.add("hidden");
+  if (settings) {
+    settings.classList.add("hidden");
+  }
 }
 
-/* ============================================================
-   10. FUNKCIA: restartTest()
-   Resetuje všetky premenné a pripraví trenažér na nový štart.
-   ============================================================ */
-/**
- * FUNKCIA restartTest:
- * Tu bola chyba. Musíme jasne povedať, že ak sme v móde slov, 
- * displej musí brať 'wordLimit' a nie 'testduration'.
- */
+
+
 function restartTest() {
+  // stop timera
   clearInterval(timeInterval);
   timeInterval = null;
   startTime = null;
-  
-  // Resetujeme čas na základnú dĺžku (napr. 60s)
-  timeLeft = testduration; 
 
+  // reset hodnot
+  timeLeft = testduration;
   currentWordIndex = 0;
   currentInput = "";
   correctChars = 0;
   totalChars = 0;
 
-  // OPRAVA: Tu sa rozhodne, čo uvidíš v krúžku pri štarte
   if (currentMode === "words") {
-    timeDisplay.textContent = wordLimit + "w"; // Ak sú to slová, ukáž limit (30, 50, 100)
+    timeDisplay.textContent = wordLimit + "w";
   } else {
-    timeDisplay.textContent = timeLeft + "s";  // Ak je to čas, ukáž sekundy (15, 30, 60)
+    timeDisplay.textContent = timeLeft + "s";
   }
 
   wpmDisplay.textContent = 0;
@@ -268,25 +266,32 @@ function restartTest() {
   hint.textContent = "Start typing...";
 
   resultsView.classList.add("hidden");
-  testView.classList.remove("hidden"); // Skryjeme nastavenia počas testu
+  testView.classList.remove("hidden");
 
-  generateWords(); // Vygeneruje správny počet slov podľa módu
+  generateWords();
+
+  
 
   typingInput.disabled = false;
   typingInput.value = PLACEHOLDER;
   typingInput.focus();
 }
 
-/* ============================================================
-   11. OVLÁDANIE MÓDOV (Time/Words)
-   Funkcie, ktoré reagujú na kliknutia v hornom menu.
-   ============================================================ */
 function setDuration(dur, e) {
   testduration = dur;
-  document.querySelectorAll(".submode-btn").forEach((b) => b.classList.remove("active"));
-  if (e && e.target) e.target.classList.add("active");
+
+  let buttons = document.querySelectorAll(".submode-btn");
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].classList.remove("active");
+  }
+
+  if (e && e.target) {
+    e.target.classList.add("active");
+  }
+
   restartTest();
 }
+
 
 function setWordCount(count, e) {
   currentMode = "words";
@@ -294,54 +299,51 @@ function setWordCount(count, e) {
 
   clearInterval(timeInterval);
   timeInterval = null;
-// Opravený riadok v restartTest:
-timeDisplay.textContent = (currentMode === "words") ? wordLimit + "w" : timeLeft + "s";
+
+  if (currentMode === "words") {
+    timeDisplay.textContent = wordLimit + "w";
+  } else {
+    timeDisplay.textContent = timeLeft + "s";
+  }
+
   restartTest();
 }
 
-/* ============================================================
-   12. EVENT LISTENERY
-   Sledujú tvoje písanie a klikanie na tlačidlá.
-   ============================================================ */
 
-// Sledovanie vstupu v inpute
-typingInput.addEventListener("input", (e) => {
+
+typingInput.addEventListener("input", function(e) {
   if (!typingInput.value.startsWith(PLACEHOLDER)) {
     typingInput.value = PLACEHOLDER + typingInput.value;
   }
 
-  const cleanValue = typingInput.value.substring(1);
+  let cleanValue = typingInput.value.substring(1);
 
-  // Spustenie pri prvom písmene
   if (!startTime && cleanValue.length > 0) {
     startTime = Date.now();
     startTimer();
     hint.textContent = "";
   }
 
-  // Ak stlačíš MEDZERU
   if (cleanValue.endsWith(" ")) {
-    const typedWord = cleanValue.trim();
-    const targetWord = words[currentWordIndex];
+    let typedWord = cleanValue.trim();
+    let targetWord = words[currentWordIndex];
 
     completedWordsStatus[currentWordIndex] = typedWord === targetWord;
 
-    // Logika pre rátanie správnych písmen (pre WPM)
-    let wordCorrectChars = 0;
+    let correctCount = 0;
     for (let i = 0; i < Math.min(typedWord.length, targetWord.length); i++) {
-      if (typedWord[i] === targetWord[i]) wordCorrectChars++;
+      if (typedWord[i] === targetWord[i]) correctCount++;
     }
 
-    correctChars += wordCorrectChars;
-    if (typedWord === targetWord) correctChars++; // Pridá bod za medzeru
+    correctChars += correctCount;
+    if (typedWord === targetWord) correctChars++;
     totalChars += typedWord.length + 1;
 
-    currentWordIndex++; // Posun na ďalšie slovo
+    currentWordIndex++;
 
-    // Ukončenie v režime slov
-    if(currentMode === "words" && currentWordIndex === wordLimit) {
-        endTest();
-        return;
+    if (currentMode === "words" && currentWordIndex === wordLimit) {
+      endTest();
+      return;
     }
 
     currentInput = "";
@@ -355,39 +357,55 @@ typingInput.addEventListener("input", (e) => {
   renderWords();
 });
 
-// Ovládanie menu - Time (Sekundy)
-timeBtn.addEventListener("click", () => {
+
+timeBtn.addEventListener("click", function() {
   currentMode = "time";
   timeBtn.classList.add("active");
   wordBtn.classList.remove("active");
   container.innerHTML = "";
-  [15, 30, 60].forEach((t) => {
-    const btn = document.createElement("button");
+
+  let times = [15, 30, 60];
+  for (let i = 0; i < times.length; i++) {
+    let t = times[i];
+    let btn = document.createElement("button");
     btn.textContent = t + "s";
-    btn.className = "submode-btn" + (t === testduration ? " active" : "");
-    btn.addEventListener("click", (e) => setDuration(t, e));
+    btn.className = "submode-btn";
+    if (t === testduration) {
+      btn.classList.add("active");
+    }
+    btn.addEventListener("click", function(e) {
+      setDuration(t, e);
+    });
     container.appendChild(btn);
-  });
+  }
 });
 
-// Ovládanie menu - Words (Slová)
-wordBtn.addEventListener("click", () => {
+
+wordBtn.addEventListener("click", function() {
   currentMode = "words";
   wordBtn.classList.add("active");
   timeBtn.classList.remove("active");
   container.innerHTML = "";
-  [30, 50, 100].forEach((w) => {
-    const btn = document.createElement("button");
+
+  let wordCounts = [30, 50, 100];
+  for (let i = 0; i < wordCounts.length; i++) {
+    let w = wordCounts[i];
+    let btn = document.createElement("button");
     btn.textContent = w + "w";
     btn.className = "submode-btn";
-    btn.addEventListener("click", (e) => {
-      document.querySelectorAll(".submode-btn").forEach((b) => b.classList.remove("active"));
+
+    btn.addEventListener("click", function(e) {
+      let buttons = document.querySelectorAll(".submode-btn");
+      for (let j = 0; j < buttons.length; j++) {
+        buttons[j].classList.remove("active");
+      }
       e.target.classList.add("active");
       setWordCount(w, e);
     });
+
     container.appendChild(btn);
-  });
+  }
 });
 
-// PRVOTNÉ NAŠTARTOVANIE
+
 generateWords();
