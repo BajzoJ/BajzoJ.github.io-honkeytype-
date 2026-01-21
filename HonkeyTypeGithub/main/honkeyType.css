@@ -1,6 +1,6 @@
 
 /* =====================
-    ZÁKLAD (Ujov štýl s opravami)
+    ZÁKLAD 
 ===================== */
 html,
 body {
@@ -33,7 +33,7 @@ main {
 }
 
 /* =====================
-  HEADER (Kombinácia)
+  HEADER 
 ===================== */
 header {
   display: flex;
@@ -72,7 +72,7 @@ header {
 }
 
 /* =====================
-  MENU (Módy a pod-módy)
+  MENU mody submody
 ===================== */
 #mode,
 #extended {
@@ -166,7 +166,7 @@ header {
 }
 
 /* =====================
-  ŠTATISTIKY A VÝSLEDKY
+  statistiky, vysledky
 ==================== */
 .stats {
   display: flex;
@@ -259,14 +259,7 @@ footer a:hover {
   color: #888;
 }
 
-/* =====================
-    DARK MODE - MAIN PAGE
-===================== */
-/* =====================
-    OPRAVY A DARK MODE (Prilep na koniec súboru)
-===================== */
 
-/* 1. Oprava modrého textu "Type" */
 #type {
     color: #7ec5f0 !important;
 }
