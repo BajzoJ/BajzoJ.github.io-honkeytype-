@@ -235,7 +235,9 @@ function endTest() {
 
   resultsView.classList.remove("hidden");
   testView.classList.add("hidden");
-  settings.classList.add("hidden")
+  if (settings) {
+    settings.classList.add("hidden");
+  }
 }
 
 
