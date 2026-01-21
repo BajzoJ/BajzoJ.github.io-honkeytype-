@@ -1,7 +1,5 @@
 
-/* =====================
-   BASE
-===================== */
+
 
 html, body {
   height: 100%;
@@ -15,11 +13,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
-
-/* =====================
-   PAGE LAYOUT
-===================== */
 
 .page {
   min-height: 100vh;
@@ -49,10 +42,11 @@ header {
   display: flex;
   align-items: center;
   gap: 8px;
+  color: #3b718a;
 }
 
-#type {
-    color: #7ec5f0;
+#logo {
+  height: 28px;
 }
 
 .header-left a {
@@ -145,7 +139,7 @@ header {
 }
 
 /* =====================
-   ICONS (register / login) 
+   ICONS 
 ===================== */
 
 .auth-title img {
@@ -224,20 +218,6 @@ header {
   text-decoration: underline;
 }
 
-/* =====================
-   FADE-IN ANIMATION
-===================== */
-
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px); /* jemný posun hore */
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.fade-in.show {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 
 /* =====================
@@ -271,4 +251,3 @@ footer a:hover {
   align-items: center;
   gap: 12px;
 }
-/* DARK MODE DOPLNOK PRE REGISTER */
