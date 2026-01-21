@@ -235,9 +235,7 @@ function endTest() {
 
   resultsView.classList.remove("hidden");
   testView.classList.add("hidden");
-  if (settings) {
-    settings.classList.add("hidden");
-  }
+  settings.classList.add("hidden")
 }
 
 
@@ -267,6 +265,7 @@ function restartTest() {
 
   resultsView.classList.add("hidden");
   testView.classList.remove("hidden");
+  settings.classList.remove("hidden");
 
   generateWords();
 
