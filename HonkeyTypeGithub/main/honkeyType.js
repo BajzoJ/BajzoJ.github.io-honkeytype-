@@ -267,6 +267,7 @@ function restartTest() {
 
   resultsView.classList.add("hidden");
   testView.classList.remove("hidden");
+  settings.classList.remove("hidden");
 
   generateWords();
 
