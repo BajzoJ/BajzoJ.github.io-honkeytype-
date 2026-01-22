@@ -192,6 +192,7 @@ function startTimer() {
 
 
 
+
 function endTest() {
   clearInterval(timeInterval);
   typingInput.disabled = true;
@@ -347,6 +348,7 @@ typingInput.addEventListener("input", function(e) {
       return;
     }
 
+
     currentInput = "";
     typingInput.value = PLACEHOLDER;
     renderWords();
@@ -356,6 +358,14 @@ typingInput.addEventListener("input", function(e) {
 
   currentInput = cleanValue;
   renderWords();
+});
+document.addEventListener("keydown", (e) => {
+  if(e.key === " " && currentMode === "words"){
+    let remaining = wordLimit - (currentWordIndex + 1);
+    if(remaining >= 0) {
+      timeDisplay.textContent = remaining + "w";
+    }
+  }
 });
 
 
