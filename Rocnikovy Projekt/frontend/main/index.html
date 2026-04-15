@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>honkeytype</title>
+    <link rel="icon" href="../icons/HonkeyType_blede_logo.png" />
+    <link rel="stylesheet" href="honkeyType.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div class="header-left">
+          <img src="../icons/HonkeyType_tmave_logo.png" id="logo" />
+          <h1><strong id="type">Type</strong></h1>
+        </div>
+        <a href="../register/register.html" class="login-btn">sign in</a>
+      </header>
+
+      <main class="container">
+        <div class="settings">
+          <div id="mode">
+            <button class="active modebtn" id="timeBtn">time</button>
+            <button class="modebtn" id="wordBtn">words</button>
+          </div>
+          <div id="extended"></div>
+        </div>
+
+        <div id="testView">
+          <div class="word-container">
+            <div class="words" id="wordsDisplay"></div>
+            <textarea
+              id="typingInput"
+              rows="3"
+              class="hidden-input"
+              autocomplete="off"
+              autocorrect="off"
+              spellcheck="false"
+              placeholder="start typing..."
+            ></textarea>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-value" id="timeDisplay">60s</div>
+              <div class="stat-label">time</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value" id="wpmDisplay">0</div>
+              <div class="stat-label">wpm</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value" id="accuracyDisplay">100%</div>
+              <div class="stat-label">accuracy</div>
+            </div>
+          </div>
+          <div class="hint" id="hint">Start typing to begin the test</div>
+        </div>
+
+        <div id="resultsView" class="hidden">
+          <h2 class="results-title">Test Complete</h2>
+
+          <div class="results-stats">
+            <div class="res-item">
+              <span class="res-label">wpm</span>
+              <span class="res-value" id="finalWpm">0</span>
+            </div>
+            <div class="res-item">
+              <span class="res-label">accuracy</span>
+              <span class="res-value" id="finalAccuracy">0%</span>
+            </div>
+            <div class="res-item">
+              <span class="res-label">raw</span>
+              <span class="res-value" id="finalRawWpm">0</span>
+            </div>
+            <div class="res-item">
+              <span class="res-label">chars</span>
+              <span class="res-value" id="finalChars">0</span>
+            </div>
+          </div>
+
+          <button onclick="restartTest()" class="restart-btn">
+            Restart test
+          </button>
+        </div>
+
+        <canvas id="wpmGraph" height="80"></canvas>
+      </main>
+
+      <footer>
+        <div class="footer-left">
+          <a href="#">support</a>
+          <a href="#" id="supportBtn">DATABASE TEST</a>
+          <a href="https://github.com">github</a>
+          <a href="https://discord.gg">discord</a>
+        </div>
+
+        <div class="footer-right">
+          <span>v1.0</span>
+        </div>
+      </footer>
+    </div>
+    <script src="HonkeyType.js"></script>
+  </body>
+</html>
