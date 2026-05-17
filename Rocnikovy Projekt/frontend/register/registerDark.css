@@ -1,0 +1,269 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: "Courier New";
+  background-color: #151619; 
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+
+/* =====================
+   HEADER
+===================== */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  border-bottom: 1px solid #2a2c2f;
+  background-color: #1a1b1e;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e09e76;
+}
+input[type="checkbox"] {
+  accent-color: #e09e76; /* Tu nastavíš svoju farbu */}
+
+#logo {
+  height: 28px;
+}
+#logo {
+  height: 28px;
+  /* Tmavšia, sýtejšia oranžová z ružového základu */
+  filter: sepia(100%) hue-rotate(320deg) saturate(250%) brightness(85%) contrast(110%);
+  transition: 0.3s;
+}
+
+#logo:hover {
+  /* Pri hoveri sa trochu rozsvieti */
+  filter: sepia(100%) hue-rotate(320deg) saturate(250%) brightness(100%) contrast(100%);
+}
+
+.header-left a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+}
+
+#logo {
+  height: 28px;
+}
+
+
+/* =====================
+   AUTH LAYOUT
+===================== */
+
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 160px;           
+  margin-top: 120px;   
+}
+
+.auth-box {
+  width: 340px;       
+  display: flex;
+  flex-direction: column;
+  gap: 14px;          
+}
+
+
+/* =====================
+   TITLES
+===================== */
+
+.auth-title {
+  font-size: 20px;
+  font-weight: normal;
+  color: #e09e76;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+
+/* =====================
+   INPUTS
+===================== */
+
+.auth-box input[type="text"],
+.auth-box input[type="email"],
+.auth-box input[type="password"] {
+  background: #202224;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-family: monospace;
+  font-size: 16px;  
+  color: #aaa;
+  outline: none;
+}
+
+.auth-box input::placeholder {
+  color: #555;
+}
+
+
+/* =====================
+   BUTTONS
+===================== */
+
+.auth-btn {
+  margin-top: 6px;
+  background: #e09e76;
+  border: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 16px;
+  color: #fff6ea;
+  cursor: pointer;
+}
+
+.auth-btn:hover {
+  background: #b37e5e;
+}
+
+/* =====================
+   ICONS 
+===================== */
+
+.auth-title img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+/* BUTTON ICONS */
+.auth-btn img {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+}
+
+/* SOCIAL ICONS */
+.socials img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+
+
+/* =====================
+   SOCIAL LOGIN
+===================== */
+
+.socials {
+  display: flex;
+  gap: 10px;
+}
+.icon {
+  height: 28px; /* Tvoja výška */
+  /* Tento filter urobí z čiernej presne farbu #aaa (svetlosivú) */
+  filter: invert(75%) sepia(0%) saturate(0%) brightness(100%) contrast(100%);
+  transition: 0.3s;
+}
+
+.socials button {
+  flex: 1;
+  background: #202224;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.socials button:hover {
+  background: #b37e5e;
+}
+
+
+/* =====================
+   register
+===================== */
+
+.divider {
+  text-align: center;
+  font-size: 12px;
+  color: #aaa;
+  margin: 6px 0;
+}
+
+.remember {
+  font-size: 14px;
+  color: #aaa;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.forgot {
+  font-size: 14px;
+  color: #aaa;
+  text-decoration: none;
+  text-align: right;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+
+
+/* =====================
+   FOOTER
+===================== */
+
+footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  font-size: 16px;
+  color: #555;
+  background-color: #1a1b1e;
+  border-top: 1px solid #2a2c2f;
+}
+
+footer a {
+  color: #555;
+  text-decoration: none;
+  margin-right: 12px;
+}
+
+footer a:hover {
+  font-weight: bold;
+}
+
+.footer-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
