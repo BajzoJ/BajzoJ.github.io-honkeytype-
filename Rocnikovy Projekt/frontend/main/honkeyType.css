@@ -14,6 +14,7 @@ body {
   color: #333;
   display: flex;
   flex-direction: column;
+  transition: 0.3s;
 }
 
 .page {
@@ -42,6 +43,7 @@ header {
   padding: 12px 24px;
   border-bottom: 1px solid #e0e0e0;
   background-color: #f5f5f5;
+  transition: 0.3s;
 }
 
 .header-left {
@@ -105,6 +107,7 @@ header {
   background: #fff;
   font-weight: bold;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: 0.3s;
 }
 
 /* =====================
@@ -120,6 +123,7 @@ header {
   min-height: 120px;
   min-width: 850px;
   cursor: text;
+  transition: 0.3s;
 }
 
 .words {
@@ -239,6 +243,7 @@ footer {
   color: #666;
   background-color: #f5f5f5;
   border-top: 1px solid #e0e0e0;
+  transition: 0.3s;
 }
 
 footer a {
@@ -263,4 +268,14 @@ footer a:hover {
 .discordBtn {
     border: none;
     background-color: transparent;
+}
+#colorBtn {
+  background: transparent;
+  border: none;
+  padding: 4px 10px;
+  font-size: 14px;
+  color: #7ec5f0;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: 0.3s;
 }

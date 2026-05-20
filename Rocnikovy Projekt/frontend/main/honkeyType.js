@@ -1,6 +1,6 @@
+// projekt
 console.log("HonkeyType Hybrid JS loaded");
 console.log("aaaa Hybrid JS loaded");
-
 
 const wordList = [
   "moan", "arrogant", "messy", "mind", "fabulous", "polish", "foolish", "straw",
@@ -60,6 +60,7 @@ const container = document.getElementById("extended");
 const timeBtn = document.getElementById("timeBtn");
 const wordBtn = document.getElementById("wordBtn");
 const settings = document.querySelector(".settings");
+const colorBtn = document.getElementById("colorBtn");
 
 
 function generateWords() { //generovanie slov
@@ -235,7 +236,6 @@ function endTest() {
       el.textContent = vals[i];
     }
   }
-
 
   fetch("/api/test-finished", {
     method: "POST",
@@ -454,7 +454,5 @@ document.getElementById("supportBtn").addEventListener("click", async (e) => {
 
   alert(`Počet testov v DB: ${data.testsInDB}`);
 });
-
-
 
 generateWords();

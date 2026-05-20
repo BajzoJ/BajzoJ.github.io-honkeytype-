@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>honkeytype – register</title>
   <link rel="icon" href="../icons/HonkeyType_blede_logo.png" />
-  <link rel="stylesheet" href="register.css" />
+  <link rel="stylesheet" id="regStyle" href="register.css" />
   <script src="../themes.js"></script>
 </head>
 
@@ -30,7 +29,7 @@
         <!-- REGISTER -->
         <div class="auth-box">
           <h2 class="auth-title">
-            <img src="../icons/adduser.png" alt=""> register
+            <img src="../icons/adduser.png" alt="" class="icon"> register
           </h2>
         
           <input type="text" placeholder="username" />
@@ -47,12 +46,12 @@
         <!-- LOGIN -->
         <div class="auth-box">
           <h2 class="auth-title">
-            <img src="../icons/login.png" alt=""> login
+            <img src="../icons/login.png" alt="" class="icon"> login
           </h2>
         
           <div class="socials">
-            <button><img src="../icons/google.png" alt=""></button>
-            <button><img src="../icons/github.png" alt=""></button>
+            <button><img src="../icons/google.png" alt="" class="icon"></button>
+            <button><img src="../icons/github.png" alt="" class="icon"></button>
           </div>
         
           <div class="divider">or</div>
@@ -61,7 +60,7 @@
           <input type="password" placeholder="password" />
         
           <label class="remember">
-            <input type="checkbox" checked />
+            <input type="checkbox" checked id="checkBox" />
             remember me
           </label>
         

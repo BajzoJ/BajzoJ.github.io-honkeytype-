@@ -1,14 +1,17 @@
+// TÁTO ČASŤ SA SPUSTÍ OKAMŽITE
 (function() {
     const savedTheme = localStorage.getItem("theme") || "light";
     const mainStyle = document.getElementById("style");
     const regStyle = document.getElementById("regStyle");
 
+    // Ak už v HTML existujú linky (čo v head ešte nemusia byť), aplikujeme hneď
     if (savedTheme === "dark") {
         if (mainStyle) mainStyle.href = "honkeyTypeDark.css";
         if (regStyle) regStyle.href = "registerDark.css";
     }
 })();
 
+// Zvyšok logiky (tlačidlá atď.) zostáva v DOMContentLoaded
 document.addEventListener("DOMContentLoaded", function() {
     const savedTheme = localStorage.getItem("theme") || "light";
     applyTheme(savedTheme);
