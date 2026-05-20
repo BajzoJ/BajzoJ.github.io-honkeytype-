@@ -1,13 +1,12 @@
 const pool = require("../db/pool");
 
-async function insertTest(wpm, accuracy, rawWpm, chars) {
+async function insertTest(wpm, accuracy, rawWpm, chars, userId) {
   const result = await pool.query(
-    `INSERT INTO test_results (wpm, accuracy, raw_wpm, chars)
-     VALUES ($1, $2, $3, $4)
+    `INSERT INTO test_results (wpm, accuracy, raw_wpm, chars, user_id)
+     VALUES ($1, $2, $3, $4, $5)
      RETURNING *`,
-    [wpm, accuracy, rawWpm, chars]
+    [wpm, accuracy, rawWpm, chars, userId]
   );
-
   return result.rows[0];
 }
 

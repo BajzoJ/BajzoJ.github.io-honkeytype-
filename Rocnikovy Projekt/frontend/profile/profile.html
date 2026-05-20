@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>honkeytype – profile</title>
+  <link rel="icon" href="../icons/HonkeyType_blede_logo.png" />
+  <link rel="stylesheet" href="profile.css" />
+  <script src="../themes.js"></script>
+</head>
+<body>
+  <div class="page">
+
+    <header>
+      <div class="header-left">
+        <a href="../main/index.html">
+          <img src="../icons/HonkeyType_tmave_logo.png" id="logo" />
+          <h1><strong id="type">Type</strong></h1>
+        </a>
+      </div>
+      <button class="login-btn" id="logout-btn">logout</button>
+    </header>
+
+    <main class="container">
+      <div class="profile-header">
+        <h2 id="profile-username">–</h2>
+        <p class="joined">joined: <span id="profile-joined">–</span></p>
+      </div>
+
+      <h3 class="section-title">test history</h3>
+      <table id="tests-table">
+        <thead>
+          <tr>
+            <th>wpm</th>
+            <th>raw</th>
+            <th>accuracy</th>
+            <th>chars</th>
+            <th>date</th>
+          </tr>
+        </thead>
+        <tbody id="tests-body">
+          <tr><td colspan="5">loading...</td></tr>
+        </tbody>
+      </table>
+    </main>
+
+    <footer>
+      <div class="footer-left">
+        <a href="#">support</a>
+        <a href="#">github</a>
+        <a href="#">discord</a>
+      </div>
+      <div class="footer-right"><span>v1.0</span></div>
+    </footer>
+
+  </div>
+  <script src="profile.js"></script>
+</body>
+</html>

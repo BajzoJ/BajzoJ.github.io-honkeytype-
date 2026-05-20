@@ -12,17 +12,15 @@
 <body>
   <div class="page">
 
-    <!-- HEADER -->
     <header> 
-    <div class="header-left">
+      <div class="header-left">
         <a href="../main/index.html">
-            <img src="../icons/HonkeyType_tmave_logo.png" id="logo" />
-            <h1><strong id="type">Type</strong></h1>
+          <img src="../icons/HonkeyType_tmave_logo.png" id="logo" />
+          <h1><strong id="type">Type</strong></h1>
         </a>
-    </div>
+      </div>
     </header>
 
-    <!-- MAIN (PRÁZDNE) -->
     <main>
       <div class="auth-wrapper">
       
@@ -31,15 +29,11 @@
           <h2 class="auth-title">
             <img src="../icons/adduser.png" alt="" class="icon"> register
           </h2>
-        
-          <input type="text" placeholder="username" />
-          <input type="email" placeholder="email" />
-          <input type="email" placeholder="verify email" />
-          <input type="password" placeholder="password" />
-          <input type="password" placeholder="verify password" />
-        
-          <button class="auth-btn">
-             <span>↪</span> sign up
+          <input id="reg-username" type="text" placeholder="username" />
+          <input id="reg-password" type="password" placeholder="password" />
+          <input id="reg-password-verify" type="password" placeholder="verify password" />
+          <button class="auth-btn" id="reg-btn">
+            <span>↪</span> sign up
           </button>
         </div>
       
@@ -48,41 +42,32 @@
           <h2 class="auth-title">
             <img src="../icons/login.png" alt="" class="icon"> login
           </h2>
-        
           <div class="socials">
             <button><img src="../icons/google.png" alt="" class="icon"></button>
             <button><img src="../icons/github.png" alt="" class="icon"></button>
           </div>
-        
           <div class="divider">or</div>
-        
-          <input type="email" placeholder="email" />
-          <input type="password" placeholder="password" />
-        
+          <input id="login-username" type="text" placeholder="username" />
+          <input id="login-password" type="password" placeholder="password" />
           <label class="remember">
             <input type="checkbox" checked id="checkBox" />
             remember me
           </label>
-        
-          <button class="auth-btn">
+          <button class="auth-btn" id="login-btn">
             <span>↪</span> sign in
           </button>
-        
           <a href="#" class="forgot">forgot password?</a>
         </div>
       
       </div>
     </main>
 
-
-    <!-- FOOTER -->
     <footer>
       <div class="footer-left">
         <a href="#">support</a>
         <a href="#">github</a>
         <a href="#">discord</a>
       </div>
-
       <div class="footer-right">
         <span>v1.0</span>
       </div>

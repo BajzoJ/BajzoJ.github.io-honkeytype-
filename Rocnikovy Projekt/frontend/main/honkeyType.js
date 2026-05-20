@@ -240,7 +240,8 @@ function endTest() {
   fetch("/api/test-finished", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${localStorage.getItem("token")}`
     },
     body: JSON.stringify({
       wpm: wpm,
@@ -456,3 +457,12 @@ document.getElementById("supportBtn").addEventListener("click", async (e) => {
 });
 
 generateWords();
+
+// Auth hlavička
+const username = localStorage.getItem("username");
+
+if (username) {
+  document.getElementById("sign-in-btn").style.display = "none";
+  document.getElementById("user-menu").style.display = "flex";
+  document.getElementById("profile-btn").textContent = username;
+}
